@@ -1,0 +1,221 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #FFD700);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #FFA500);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #FFD700;
+}
+
+/* Gold gradient text */
+.gold-gradient-text {
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Gold gradient background */
+.gold-gradient-bg {
+  background: linear-gradient(180deg, #000000 0%, #1A1A1A 50%, #FFD700 100%);
+}
+
+/* Gold horizontal gradient background */
+.gold-gradient-horizontal-bg {
+  background: linear-gradient(90deg, #000000 0%, #1A1A1A 50%, #FFD700 100%);
+}
+
+/* Gold accents */
+.gold-accent {
+  color: #FFD700;
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  background-clip: padding-box;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #FFD700, #1A1A1A, #FFD700);
+  border-radius: 0.5rem;
+  z-index: -1;
+  animation: border-animate 4s linear infinite;
+}
+
+@keyframes border-animate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Scroll animations */
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section backgrounds */
+.section-dark {
+  background-color: #000000;
+  color: #FFF8DC;
+}
+
+.section-gold {
+  background-color: #FFD700;
+  color: #000000;
+}
+
+.section-charcoal {
+  background-color: #1A1A1A;
+  color: #FFF8DC;
+}
+
+/* Black to gold gradient overlay for images */
+.image-overlay {
+  position: relative;
+}
+
+.image-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(255,215,0,0.3));
+  z-index: 1;
+}
+
+/* Form inputs styling */
+input, textarea, select {
+  background-color: #1A1A1A;
+  color: #FFF8DC;
+  border: 1px solid #333333;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+  outline: none;
+}
+
+/* Override Quill styles to ensure lists appear properly */
+.ql-editor ul {
+  list-style-type: disc !important;
+  margin-left: 1.5em !important;
+}
+
+.ql-editor ol {
+  list-style-type: decimal !important;
+  margin-left: 1.5em !important;
+}
+
+.ql-editor li {
+  display: list-item !important;
+}
+
+/* Ensure lists are properly displayed in the prose content */
+.prose ul {
+  list-style-type: disc !important;
+  margin-left: 1.5em !important;
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+  margin-left: 1.5em !important;
+}
+
+.prose li {
+  display: list-item !important;
+}
+
+/* Specific styling for blog content */
+.blog-content ul {
+  list-style-type: disc !important;
+  padding-left: 2em !important;
+  margin: 1em 0 !important;
+  color: #FFF8DC !important;
+}
+
+.blog-content ol {
+  list-style-type: decimal !important;
+  padding-left: 2em !important;
+  margin: 1em 0 !important;
+  color: #FFF8DC !important;
+}
+
+.blog-content li {
+  display: list-item !important;
+  margin: 0.5em 0 !important;
+  color: #FFF8DC !important;
+}
+
+.blog-content p {
+  color: #FFF8DC !important;
+}
+
+/* Make all prose content text light colored */
+.prose {
+  color: #FFF8DC !important;
+}
+
+.prose p, .prose span, .prose div {
+  color: #FFF8DC !important;
+}
