@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import SectionTitle from "@/components/common/SectionTitle";
 import CTAButton from "@/components/common/CTAButton";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 
 const AboutSection = () => {
   return (
@@ -30,6 +31,10 @@ const AboutSection = () => {
           />
         </motion.div>
         
+        {/* Move testimonials above the Unlock section */}
+        <div className="mb-12">
+          <TestimonialsSection />
+        </div>
         <h3 className="text-2xl font-bold text-center mb-8 text-royal-gold">Unlock Your Business Potential</h3>
         <p className="text-center text-lg font-semibold text-soft-cream mb-10">EMPOWERING ENTREPRENEURS AND PROFESSIONALS WITH TAILORED BUSINESS STRATEGIES</p>
         

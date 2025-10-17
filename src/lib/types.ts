@@ -16,3 +16,31 @@ export enum TemplateType {
   TEMPLATE2 = 'template2',
   TEMPLATE3 = 'template3',
 } 
+
+// TEAM MEMBER TYPES
+export interface TeamMember {
+  id?: string;
+  name: string;
+  position: string;
+  expertise?: string;
+  category?: 'strategy' | 'finance' | 'operations' | 'technology' | 'legal' | 'hr';
+  bio?: string;
+  imageBase64?: string; // stored as base64 string
+  createdAt?: number;
+}
+
+export type TeamMemberFormData = Omit<TeamMember, 'id' | 'imageBase64' | 'createdAt'>;
+
+// TESTIMONIAL TYPES
+export interface Testimonial {
+  id?: string;
+  clientName: string;
+  clientPosition: string;
+  clientCompany?: string;
+  testimonialText: string;
+  imageURL?: string; // base64 or URL
+  featured: boolean;
+  createdAt?: number;
+}
+
+export type TestimonialFormData = Omit<Testimonial, 'id' | 'imageURL' | 'createdAt'>; 

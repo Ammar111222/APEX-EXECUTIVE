@@ -26,7 +26,7 @@ const Template1 = ({ blog }: { blog: BlogPost }) => {
         <div className="flex items-center">
           <Calendar className="h-4 w-4 mr-1" />
           <span className="text-sm">
-            {format(new Date(blog.createdAt), "MMMM d, yyyy")}
+            {/* Date hidden intentionally */}
           </span>
         </div>
       </div>
@@ -59,7 +59,7 @@ const Template2 = ({ blog }: { blog: BlogPost }) => {
             <div className="flex items-center">
               <Calendar className="h-4 w-4 mr-1" />
               <span className="text-sm">
-                {format(new Date(blog.createdAt), "MMMM d, yyyy")}
+                {/* Date hidden intentionally */}
               </span>
             </div>
           </div>
@@ -86,7 +86,7 @@ const Template3 = ({ blog }: { blog: BlogPost }) => {
         <div className="flex items-center">
           <Calendar className="h-4 w-4 mr-1" />
           <span className="text-sm">
-            {format(new Date(blog.createdAt), "MMMM d, yyyy")}
+            {/* Date hidden intentionally */}
           </span>
         </div>
       </div>

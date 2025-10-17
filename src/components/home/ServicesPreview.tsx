@@ -98,6 +98,51 @@ const ServicesPreview = () => {
         "Strategic Support for Successful Mergers & Acquisitions: Expert guidance through mergers, acquisitions, and other strategic transactions to ensure optimal valuations and seamless integrations.",
       link: "/services#ma",
     },
+    {
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      ),
+      title: "Outsourced HR Services",
+      description:
+        "Expert HR Support Without the Overhead: Professional HR solutions including talent acquisition, performance management, compliance support, and employee relations to streamline your business operations.",
+      link: "/services#outsourced-hr",
+    },
+    {
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 14a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm0-6a2 2 0 1 0 2 2 2 2 0 0 0-2-2Z" />
+        </svg>
+      ),
+      title: "Executive Coaching",
+      description:
+        "Tailored coaching for leaders and executives to unlock peak performance, enhance decision-making, and drive meaningful organizational results.",
+      link: "/services#executive-coaching",
+    },
   ];
 
   return (
@@ -119,7 +164,7 @@ const ServicesPreview = () => {
           We offer tailored solutions that will elevate your business to the next level.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-12">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
@@ -166,7 +211,7 @@ const ServicesPreview = () => {
 
         <div className="flex justify-center mt-10">
           <CTAButton
-            text="See All Services"
+            text="Download All Toolkits"
             href="/services"
             icon={
               <svg

@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read access to all blog posts for anyone
+    match /blogs/{document=**} {
+      allow read: if true;
+      // Only allow write operations when authenticated
+      allow write: if request.auth != null;
+    }
+    
+    // Allow read access to all testimonials for anyone
+    match /testimonials/{document=**} {
+      allow read: if true;
+      // Only allow write operations when authenticated
+      allow write: if request.auth != null;
+    }
+
+    // Allow read access to all team members for anyone
+    match /teamMembers/{document=**} {
+      allow read: if true;
+      // Only allow write operations when authenticated
+      allow write: if request.auth != null;
+    }
+  }
+}

@@ -338,11 +338,7 @@ const Insights = () => {
                     key={post.id}
                     image={post.imageURL}
                     title={post.title}
-                    date={new Date(post.createdAt).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}
+                    date={""}
                     summary={post.shortDescription}
                     slug={post.slug}
                     delay={index * 0.1}
@@ -351,34 +347,6 @@ const Insights = () => {
                 ))}
               </div>
             )}
-          </div>
-        </section>
-
-        {/* Webinar Promo */}
-        <section className="py-20 bg-deep-charcoal border-t border-royal-gold/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-royal-gold">
-                  Join Our Next Webinar
-                </h2>
-                <p className="text-soft-cream/80 mb-8 text-lg">
-                  Stay ahead of the curve with our expert-led webinars on business growth strategies.
-                </p>
-                
-                <a
-                  href="/webinars"
-                  className="inline-block bg-royal-gold hover:bg-warm-gold text-jet-black font-medium py-3 px-6 rounded-md transition-colors duration-300"
-                >
-                  View Upcoming Webinars
-                </a>
-              </motion.div>
-            </div>
           </div>
         </section>
       </motion.div>

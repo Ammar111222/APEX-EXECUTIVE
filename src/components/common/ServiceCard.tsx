@@ -48,7 +48,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         to={link}
         className={`${linkClass} flex items-center ${linkHoverClass} transition-colors`}
       >
-        Learn More
+        Download Toolkit
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

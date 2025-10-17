@@ -1,8 +1,22 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
+}
+
+/* Global mobile overflow fix */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure media never overflow horizontally */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
 }
 
 .logo {
@@ -129,6 +143,22 @@
 /* Black to gold gradient overlay for images */
 .image-overlay {
   position: relative;
+  max-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%; /* Focus more on the upper part of images */
+  transform: scale(1.02);
+  transition: transform 0.5s ease;
+}
+
+.image-overlay:hover img {
+  transform: scale(1.05);
 }
 
 .image-overlay::after {
@@ -138,8 +168,25 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(255,215,0,0.3));
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(255,215,0,0.2));
   z-index: 1;
+}
+
+/* Responsive image handling */
+@media (max-width: 768px) {
+  .image-overlay {
+    height: 400px !important;
+  }
+  
+  .image-overlay img {
+    object-position: 50% 20%;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-overlay {
+    height: 350px !important;
+  }
 }
 
 /* Form inputs styling */

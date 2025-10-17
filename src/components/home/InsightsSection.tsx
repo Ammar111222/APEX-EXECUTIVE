@@ -17,7 +17,7 @@ const InsightsSection = () => {
           {insights.map((insight, index) => (
             <InsightCard
               key={index}
-              date={insight.date}
+          date={undefined}
               title={insight.title}
               link={insight.link}
               delay={index * 0.2}
@@ -80,7 +80,7 @@ const InsightsSection = () => {
 };
 
 interface InsightCardProps {
-  date: string;
+  date?: string;
   title: string;
   link: string;
   delay?: number;
@@ -96,7 +96,7 @@ const InsightCard: React.FC<InsightCardProps> = ({ date, title, link, delay = 0 
       className="bg-deep-charcoal border border-royal-gold/30 rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:border-royal-gold/60 transition-all duration-300"
     >
       <Link to={link} className="block p-6">
-        <p className="text-royal-gold text-sm font-medium mb-2">{date}</p>
+        {date ? <p className="text-royal-gold text-sm font-medium mb-2">{date}</p> : null}
         <h3 className="text-xl font-bold text-soft-cream mb-2 hover:text-royal-gold transition-colors">{title}</h3>
         <div className="flex justify-end mt-4">
           <span className="inline-flex items-center text-soft-cream/70 hover:text-royal-gold transition-colors">
@@ -125,12 +125,12 @@ const InsightCard: React.FC<InsightCardProps> = ({ date, title, link, delay = 0 
 
 const insights = [
   {
-    date: "26 March 2025",
+    date: "",
     title: "How Apex supports VC-backed businesses",
     link: "/insights/vc-backed-businesses",
   },
   {
-    date: "18 February 2025",
+    date: "",
     title: "Tech Investment Reaches £20 billion in the last 12 months",
     link: "/insights/tech-investment",
   },

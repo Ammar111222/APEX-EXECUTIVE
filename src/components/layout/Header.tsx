@@ -12,10 +12,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import ToolkitModal from '@/components/common/ToolkitModal';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [toolkitOpen, setToolkitOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,6 +47,7 @@ const Header = () => {
     { title: "Venture Growth", href: "/services#venture" },
     { title: "M&A Advisory", href: "/services#ma" },
     { title: "Outsourced HR", href: "/services#outsourced-hr" },
+    { title: "Executive Coaching", href: "/services#executive-coaching" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -167,6 +170,7 @@ const Header = () => {
           <Button
             variant="gold"
             className="font-medium"
+            onClick={() => setToolkitOpen(true)}
           >
             Get Your Free Toolkit
           </Button>
@@ -259,6 +263,7 @@ const Header = () => {
                 <Button
                 variant="gold"
                 className="mt-4 w-full"
+                onClick={() => setToolkitOpen(true)}
                 >
                   Get Your Free Toolkit
                 </Button>
@@ -266,6 +271,8 @@ const Header = () => {
           </div>
         </div>
       )}
+      {/* Toolkit Modal */}
+      <ToolkitModal open={toolkitOpen} onClose={() => setToolkitOpen(false)} />
     </header>
   );
 };

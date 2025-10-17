@@ -5,7 +5,6 @@ import TrustBar from "@/components/home/TrustBar";
 import AboutSection from "@/components/home/AboutSection";
 import ServicesPreview from "@/components/home/ServicesPreview";
 import TeamSection from "@/components/home/TeamSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
 import InsightsSection from "@/components/home/InsightsSection";
 import PackagesSection from "@/components/home/PackagesSection";
 import CTASection from "@/components/home/CTASection";
@@ -33,7 +32,6 @@ const Home = () => {
         <ServicesPreview />
         <TeamSection />
         <PackagesSection />
-        <TestimonialsSection />
         <InsightsSection />
         <CTASection />
       </motion.div>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface InsightCardProps {
   image: string;
   title: string;
-  date: string;
+  date?: string;
   summary: string;
   slug: string;
   delay?: number;
@@ -50,7 +50,9 @@ const InsightCard: React.FC<InsightCardProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-jet-black/80 to-transparent"></div>
       </div>
       <div className="p-6 flex flex-col flex-grow">
-        <span className={`text-sm ${dateClass} mb-2`}>{date}</span>
+        {date ? (
+          <span className={`text-sm ${dateClass} mb-2`}>{date}</span>
+        ) : null}
         <h3 className={`text-xl font-bold mb-3 transition-colors ${titleClass}`}>
           <Link to={`/insights/${slug}`}>{title}</Link>
         </h3>

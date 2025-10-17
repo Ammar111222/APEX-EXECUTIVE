@@ -36,11 +36,11 @@ const PackagesSection = () => {
           <p className="mb-4 text-soft-cream">Apex Associates fees typically range from £600-£1800 per day depending on the depth of the project and the skills required to deliver.</p>
           <p className="text-sm text-soft-cream/70 italic">*Our money-back guarantee is subject to terms and conditions available on request.</p>
           
-          <div className="mt-8">
+          <div className="mt-8 flex justify-center">
             <CTAButton 
               text="CONTACT US FOR MORE INFORMATION ON OUR PACKAGES"
               href="/contact"
-              className="uppercase"
+              className="uppercase w-auto max-w-full text-xs sm:text-sm md:text-base px-3 py-2 sm:px-5 sm:py-3 text-center whitespace-normal break-words"
             />
           </div>
         </motion.div>

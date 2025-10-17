@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import SectionTitle from "@/components/common/SectionTitle";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,14 +25,43 @@ const Contact = () => {
     { value: "mature", label: "Mature Business" },
   ];
   
+  const serviceOptions = [
+    { value: "", label: "Select service of interest" },
+    { value: "seed-consulting", label: "Business Consulting for Seed & Growth-Stage" },
+    { value: "sme-optimization", label: "Business Optimisation for SMEs" },
+    { value: "venture-growth", label: "Venture Growth Consulting" },
+    { value: "ma-advisory", label: "M&A Advisory Services" },
+    { value: "outsourced-hr", label: "Outsourced HR Services" },
+    { value: "other", label: "Other" },
+  ];
+  
   const onSubmit = (data: any) => {
     setIsSubmitting(true);
-    // In a real app, this would send the data to a server
-    setTimeout(() => {
-      toast.success("Thank you! We'll be in touch within 24 hours.");
-      setIsSubmitting(false);
-      reset();
-    }, 1000);
+
+    emailjs.send(
+      'service_sonn9ab', // <-- Replace with your EmailJS Service ID
+      'template_o5w59hp', // <-- Replace with your EmailJS Template ID
+      {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        businessStage: data.businessStage,
+        serviceInterest: data.serviceInterest,
+        message: data.message,
+      },
+      '_Pii-CqIlyydj16yZ' // <-- Replace with your EmailJS Public Key
+    )
+    .then(
+      (result) => {
+        toast.success("Thank you! We'll be in touch within 24 hours.");
+        setIsSubmitting(false);
+        reset();
+      },
+      (error) => {
+        toast.error("Sorry, something went wrong. Please try again later.");
+        setIsSubmitting(false);
+      }
+    );
   };
 
   return (
@@ -162,6 +192,28 @@ const Contact = () => {
                     </div>
                     
                     <div>
+                      <label htmlFor="serviceInterest" className="block text-royal-gold font-medium mb-2">
+                        Services Interested In
+                      </label>
+                      <select
+                        id="serviceInterest"
+                        {...register("serviceInterest", { required: "Please select a service you're interested in" })}
+                        className="w-full px-4 py-3 bg-jet-black border border-royal-gold/30 rounded-md focus:outline-none focus:border-royal-gold shadow-sm text-soft-cream"
+                      >
+                        {serviceOptions.map((service) => (
+                          <option key={service.value} value={service.value} className="bg-jet-black">
+                            {service.label}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.serviceInterest && (
+                        <p className="text-red-500 mt-1 text-sm">
+                          {errors.serviceInterest.message as string}
+                        </p>
+                      )}
+                    </div>
+                    
+                    <div>
                       <label htmlFor="message" className="block text-royal-gold font-medium mb-2">
                         Message
                       </label>
@@ -211,14 +263,6 @@ const Contact = () => {
                   
                   <div className="space-y-8">
                     <div>
-                      <h3 className="font-semibold text-xl mb-2 text-soft-cream">Our Location</h3>
-                      <address className="not-italic text-soft-cream/80">
-                        <p>123 Business Avenue</p>
-                        <p>London, UK EC2A 4NE</p>
-                      </address>
-                    </div>
-                    
-                    <div>
                       <h3 className="font-semibold text-xl mb-2 text-soft-cream">Contact Details</h3>
                       <ul className="space-y-3 text-soft-cream/80">
                         <li className="flex items-start">
@@ -236,7 +280,26 @@ const Contact = () => {
                           >
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                           </svg>
-                          <span>+44 (0) 20 7123 4567</span>
+                          <span>020 3834 9620</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="mr-3 mt-1 text-royal-gold"
+                          >
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect width="4" height="12" x="2" y="9"/>
+                            <circle cx="4" cy="4" r="2"/>
+                          </svg>
+                          <a href="https://www.linkedin.com/company/109445367/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="hover:text-royal-gold transition-colors">LinkedIn</a>
                         </li>
                         <li className="flex items-start">
                           <svg
@@ -254,7 +317,7 @@ const Contact = () => {
                             <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                           </svg>
-                          <span>info@apexpartners.com</span>
+                          <span>info@apexexecpartners.com</span>
                         </li>
                       </ul>
                     </div>
@@ -296,8 +359,8 @@ const Contact = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <SectionTitle
-                subtitle="VISIT US"
-                title="Our Location"
+                subtitle="CONTACT US"
+                title="Get In Touch"
                 centered={true}
               />
               
@@ -316,12 +379,11 @@ const Contact = () => {
                       strokeLinejoin="round"
                       className="mx-auto mb-4 text-royal-gold"
                     >
-                      <circle cx="12" cy="10" r="3"></circle>
-                      <path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8z"></path>
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
-                    <h3 className="text-xl font-bold mb-2 text-royal-gold">Visit Our Office</h3>
-                    <p className="text-soft-cream/80 mb-6">123 Business Avenue, London, UK EC2A 4NE</p>
-                    <p className="text-sm text-soft-cream/60 italic">Map placeholder - Would show our location at 123 Business Avenue, London</p>
+                    <h3 className="text-xl font-bold mb-2 text-royal-gold">Contact Us</h3>
+                    <p className="text-soft-cream/80 mb-6">020 3834 9620 | info@apexexecpartners.com</p>
+                    <p className="text-sm text-soft-cream/60 italic">We work remotely to serve clients across the UK and internationally</p>
                   </div>
                 </div>
               </div>

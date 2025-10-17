@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
 import SectionTitle from "@/components/common/SectionTitle";
 import CTAButton from "@/components/common/CTAButton";
+import { getAllTeamMembers } from '@/lib/teamService';
 
 const About = () => {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-  
   const filterOptions = [
     { id: "all", label: "All" },
     { id: "strategy", label: "Strategy" },
@@ -14,100 +13,24 @@ const About = () => {
     { id: "operations", label: "Operations" },
     { id: "technology", label: "Technology" },
     { id: "legal", label: "Legal" },
+    { id: "hr", label: "HR" },
   ];
   
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Jo Fleming",
-      position: "Founder of Apex Executive Partners",
-      image: "/images/jo.webp",
-      expertise: ["strategy", "operations"],
-    },
-    {
-      id: 2,
-      name: "John",
-      position: "C-Suite Fractional Board Director",
-      image: "/images/john.webp",
-      bio: "With over 40 years of experience as a Board Director, Strategy Consultant, and Entrepreneur, John has started seven of his own businesses and advised over 100 scale-ups, family businesses, and SMEs on strategy, growth, and innovation. John has been ranked among the Top UK Entrepreneurs and Innovators, and has won a Lifetime Achievement Award.",
-      expertise: ["strategy", "finance"],
-    },
-    {
-      id: 3,
-      name: "Pia",
-      position: "Commercial Business Lawyer",
-      image: "/images/pia.webp",
-      bio: "Pia is a dual qualified (English/Danish) pragmatic corporate & commercial solicitor with many years' experience advising a wide range of business clients including start-ups, SMEs and listed companies on a multitude of corporate & commercial legal issues including buying and selling of businesses/companies (M&A), cross-border transactions.",
-      expertise: ["legal"],
-    },
-    {
-      id: 4,
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState('all');
 
-      name: "Claudio",
+  useEffect(() => {
+    getAllTeamMembers().then(members => {
+      setTeamMembers(members);
+      setLoading(false);
+    });
+  }, []);
 
-      position: "United Emirates CFO, Change Agent",
-
-      image: "/images/claudio.webp",
-
-      bio: "Project and Finance Executive for processes of organizational transition. Advisory Board Member (Advisory Council Team ex-FGV) for small & medium size organizations. Change agent leading to corporate restructuring and cultural transformation, adding value to organizations through entrepreneurial mindset and spirit of innovation.",
-
-      expertise: ["finance", "operations"],
-    },
-    {
-      id: 5,
-      name: "Jade",
-      position: "UK Employment Law Solicitor",
-      image: "/images/jade.webp",
-      bio: "Jade is a highly skilled and registered solicitor specialising in employment law, dedicated to helping UK companies navigate the complexities of workplace regulations with confidence. With a proactive approach, Jade ensures businesses remain fully compliant with employment law, safeguarding them from costly disputes, legal pitfalls, and reputational damage.",
-      expertise: ["legal"],
-    },
-    {
-      id: 6,
-      name: "David",
-      position: "Digital Transformation Specialist",
-      image: "/images/david.webp",
-      bio: "David is a professionally qualified customer focused programme and digital transformation delivery specialist, with extensive international experience in the planning, execution and delivery of complex programmes and project portfolios. David works closely with our clients to design and develop class leading technical solutions.",
-      expertise: ["technology", "operations"],
-    },
-    {
-      id: 7,
-      name: "Stephen",
-      position: "Business Intelligence Specialist",
-      image: "/images/stephen.jpg",
-      bio: "With a background in serious fraud and cybercrime investigation, Stephen delivers In-Depth Business Rival Research, Helping Businesses Stay Informed and Stay Ahead. Stephen works with business owners, executives, and investors who need clear, raw data on their competitors to make strategic decisions with confidence. His focus is on precision.",
-      expertise: ["technology", "strategy"],
-    },
-    {
-      id: 8,
-      name: "Martin",
-      position: "Sustainability and Growth Specialist",
-      image: "/images/martin.webp",
-      bio: "With a proven track record of driving 250% company growth, Martin specializes in helping ambitious business owners build sustainable, scalable, and sellable ventures. Whether you're looking to streamline operations, scale effectively, or prepare your business for a successful exit, Martin can support.",
-      expertise: ["operations", "strategy"],
-    },
-    {
-      id: 9,
-      name: "Margaret",
-      position: "Executive Coach",
-      image: "/images/margaret.webp",
-      bio: "Margaret is a PGC Senior Practitioner in Business & Executive Coaching and a Fellow of the Chartered Management Institute. She specialises in 121 Leadership & Management Coaching, Psychometric Assessments, Coaching Workshops, Transitional & On-Boarding Coaching.",
-      expertise: ["operations"],
-    },
-    {
-      id: 10,
-      name: "Dan",
-      position: "Executive Business Director",
-      image: "/images/dan.webp",
-      bio: "Executive Business Director | Scaling Businesses | Driving Growth & Turnarounds. With over 30 years of leadership experience at board and MD level, Dan specialises in guiding businesses to achieve exceptional growth and long-term success. From shaping strategy to empowering leadership teams. Every business faces pivotal moments—whether it's scaling up or turning around performance—and Dan provides the expertise to navigate these critical transitions successfully.",
-      expertise: ["strategy", "operations"],
-    },
-  ];
+  const filteredMembers = selectedFilter === 'all'
+    ? teamMembers
+    : teamMembers.filter((m: any) => m.category === selectedFilter);
   
-  const filteredMembers = teamMembers.filter(member => {
-    if (activeFilter === "all") return true;
-    return member.expertise.includes(activeFilter);
-  });
-
   const companyValues = [
     {
       title: "Excellence",
@@ -262,27 +185,24 @@ const About = () => {
               title="Your Strategic Growth Partners"
               centered={true}
             />
-            
             <div className="flex justify-center mt-6 mb-12">
               <div className="flex flex-wrap gap-2 justify-center">
               {filterOptions.map((option) => (
                 <button
                   key={option.id}
-                    onClick={() => setActiveFilter(option.id)}
-                    className={`px-4 py-2 rounded-md transition-colors ${
-                    activeFilter === option.id
-                        ? "bg-royal-gold text-jet-black"
-                        : "bg-jet-black text-soft-cream hover:bg-royal-gold/20 border border-royal-gold/30"
-                  }`}
+                    className={`px-4 py-2 rounded-md transition-colors border border-royal-gold/30 ${selectedFilter === option.id ? 'bg-royal-gold text-jet-black' : 'bg-jet-black text-soft-cream hover:bg-royal-gold/20'}`}
+                    onClick={() => setSelectedFilter(option.id)}
                 >
                   {option.label}
                 </button>
               ))}
               </div>
             </div>
-            
+            {loading ? (
+              <div className="text-center text-royal-gold py-12">Loading team...</div>
+            ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {filteredMembers.map((member, index) => (
+                {filteredMembers.map((member, index) => (
                 <motion.div
                   key={member.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -293,7 +213,7 @@ const About = () => {
                 >
                   <div className="h-60 overflow-hidden">
                     <img
-                      src={member.image}
+                        src={member.imageBase64 || member.image}
                       alt={member.name}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
@@ -302,9 +222,9 @@ const About = () => {
                     <h3 className="text-xl font-bold mb-1 text-royal-gold">{member.name}</h3>
                     <p className="text-soft-cream/60 mb-4">{member.position}</p>
                     <div className="flex flex-wrap gap-2 mt-4">
-                      {member.expertise.map((skill) => (
+                        {(Array.isArray(member.expertise) ? member.expertise : (member.expertise ? member.expertise.split(',') : [])).map((skill, idx) => (
                         <span
-                          key={skill}
+                            key={skill + idx}
                           className="px-2 py-1 text-xs bg-royal-gold/10 text-royal-gold rounded-full border border-royal-gold/30"
                         >
                           {skill.charAt(0).toUpperCase() + skill.slice(1)}
@@ -315,8 +235,7 @@ const About = () => {
                 </motion.div>
               ))}
             </div>
-            
-            
+            )}
           </div>
         </section>
 

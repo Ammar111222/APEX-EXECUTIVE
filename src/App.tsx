@@ -11,6 +11,8 @@ import About from "./pages/About";
 import Insights from "./pages/Insights";
 import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import Login from "./pages/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AddBlog from "./pages/admin/AddBlog";
@@ -21,6 +23,12 @@ import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthProvider } from "./lib/AuthContext";
+import TeamMemberList from './components/admin/TeamMemberList';
+import AddTeamMember from './pages/admin/AddTeamMember';
+import EditTeamMember from './pages/admin/EditTeamMember';
+import AddTestimonial from "./pages/admin/AddTestimonial";
+import TestimonialList from "./pages/admin/TestimonialList";
+import EditTestimonial from "./pages/admin/EditTestimonial";
 
 const queryClient = new QueryClient();
 
@@ -62,9 +70,13 @@ const AnimatedRoutes = () => {
           <Route path="/insights" element={<Insights />} />
           <Route path="/insights/:slug" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+        
+        {/* Login Route - Separate from main layout */}
+        <Route path="/login" element={<Login />} />
         
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
@@ -73,6 +85,13 @@ const AnimatedRoutes = () => {
           <Route path="add" element={<AddBlog />} />
           <Route path="edit/:id" element={<EditBlog />} />
           <Route path="debug" element={<DebugPage />} />
+          <Route path="team-members" element={<TeamMemberList />} />
+          <Route path="add-team-member" element={<AddTeamMember />} />
+          <Route path="edit-team-member/:id" element={<EditTeamMember />} />
+          {/* Testimonial Management Routes */}
+          <Route path="add-testimonial" element={<AddTestimonial />} />
+          <Route path="testimonials" element={<TestimonialList />} />
+          <Route path="edit-testimonial/:id" element={<EditTestimonial />} />
         </Route>
       </Routes>
     </AnimatePresence>

@@ -52,7 +52,7 @@ export const createBlogPost = async (blogData: BlogFormData, imageFile: File): P
     const newBlog: BlogPost = {
       ...blogData,
       imageURL: imageBase64,
-      createdAt: Date.now(),
+      // createdAt intentionally omitted to avoid showing dates
       slug // Use generated slug
     };
     
@@ -70,7 +70,7 @@ export const createBlogPost = async (blogData: BlogFormData, imageFile: File): P
 export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     console.log('Getting all blog posts');
-    const q = query(collection(db, BLOGS_COLLECTION), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, BLOGS_COLLECTION));
     console.log('Query created, fetching documents');
     const querySnapshot = await getDocs(q);
     console.log(`Received ${querySnapshot.docs.length} documents`);
